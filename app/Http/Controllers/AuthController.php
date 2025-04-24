@@ -14,30 +14,33 @@ class AuthController extends \Illuminate\Routing\Controller
     
   }
   
+  /* login function */
   public function login() {
 
   }
 
+  /* register function */
   public function register(Request $request) {
     try {
-      $request->validate([
+      $request->validate([/* uses ValidatesRequests to simplify validation of data */
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:8',
       ]);
 
-      User::create([
+      User::create([ /* function to create entry into the database */
         'name' => $request->name,
         'email' => $request->email,
-        'password' => bcrypt($request->password),
+        'password' => bcrypt($request->password), /* bcrypts encrypts the password for security purposes */
       ]);
 
-      return redirect('/')->with('success', 'User successfully registered.');
+      return redirect('/')->with('success', 'User successfully registered.');/* redirection to the landing page */
     } catch(\Exception $e) {
       echo $e;
     }
   }
 
+  /* logout function */
   public function logout() {
 
   }
