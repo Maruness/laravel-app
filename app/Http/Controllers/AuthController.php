@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +32,9 @@ class AuthController extends \Illuminate\Routing\Controller
         return redirect('/')->with('success', 'Login successfully.');
       }
 
-      return redirect('/login')->with('error', 'Invalid credentials.');
+      return redirect('/login')->withErrors(['error' => 'Invalid credentials.']);
     } catch (\Exception $e) {
-      echo $e;
+      return redirect('/login')->withErrors(['error' => 'An unexpected error occurred. Please try again.']);
     }
   }
 
@@ -44,6 +45,7 @@ class AuthController extends \Illuminate\Routing\Controller
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:8',
+        'confirm_password' => 'required|string|same:password',
       ]);
 
       User::create([ /* function to create entry into the database */
@@ -53,8 +55,10 @@ class AuthController extends \Illuminate\Routing\Controller
       ]);
 
       return redirect('/')->with('success', 'User successfully registered.');/* redirection to the landing page */
+    } catch(ValidationException $e) {
+      return redirect()->back()->withErrors($e->errors());
     } catch(\Exception $e) {
-      echo $e;
+      return redirect()->back()->withErrors(['error' => 'An unexpected error occurred. Please try again.']);
     }
   }
 
