@@ -11,19 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends \Illuminate\Routing\Controller
 {
-  public function index() {
-
+  /* profile function */
+  public function index(Request $request) {
+    $deletion_form = $request->query('deletion_form', false);/* toggles delete account form */
+    $user = Auth::user();
+    return view('home', compact('user', 'deletion_form', 'password_form'));
   }
-  
+
   /* login function */
   public function login(Request $request) {
     try {
-      $request->validate([
+      $request->validate([/* validation for indexes */
         'email' => 'required|string|max:255',
         'password' => 'required|string',
       ]);
 
-      if(Auth::attempt($request->only('email', 'password'))) {
+      if(Auth::attempt($request->only('email', 'password'))) {/* login process */
         return redirect('/')->with('success', 'Login successfully.');
       }
 
@@ -58,5 +61,22 @@ class AuthController extends \Illuminate\Routing\Controller
   public function logout() {
     Auth::logout();
     return redirect('/login')->with('success', 'Logged out successfully');
+  }
+
+  /* delete account function */
+  public function deleteUser(Request $request) {
+    $request->validate([/* validation for matching password */
+        'password' => 'required|string',
+        'confirm_password' => 'required|string|same:password',
+    ]);
+
+    $user = Auth::user();
+    if (!Auth::attempt(['email' => $user->email, 'password' => $request->password])) {/* validating correct password */
+        return redirect('/')->with('error', 'Password is incorrect.');
+    }
+
+    $user->delete();/* delete */
+    Auth::logout();
+    return redirect('/register')->with('success', 'Account deleted successfully.');
   }
 }
