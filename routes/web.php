@@ -6,10 +6,11 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/login', function () {/* display login page */
   return view('login');
-})->name('login');/* needs ->name to make the middleware find the routing */
+})->name('login');/* added ->name to have a route name */
+
 Route::get('/register', function () {/* display register page */
   return view('register');
-});
+})->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');/* executes logout function from authcontroller */
 
