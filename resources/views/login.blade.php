@@ -12,11 +12,20 @@
     <label for="password" class="form-label">Password</label>
     <input type="password" id="password" name="password" class="form-box" required />
   </div>
+  @if ($errors->any()){{-- scan for errors --}}
+  <div>
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li class="text-red-400 text-sm">{{ $error }}</li>{{-- displays error --}}
+      @endforeach
+    </ul>
+  </div>
+  @endif
   <div class="center">
-    <button type="submit" class="btn-submit">Login</button>
+    <button type="submit" class="btn-submit">Login</button>{{-- submit button --}}
   </div>
 </form>
-  <div class="center">
-    <form action="/register"><button class="btn-reg">Register</button></form>
-  </div>
+<div class="center">
+  <form action="/register"><button class="btn-reg">Register</button></form>{{-- redirect to register --}}
+</div>
 </x-base>

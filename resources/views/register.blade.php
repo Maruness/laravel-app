@@ -16,11 +16,24 @@
     <label for="password" class="form-label">Password</label>
     <input type="password" id="password" name="password" class="form-box" required />
   </div>
+  <div class="mb-5">{{-- confirm password textbox --}}
+    <label for="confirm_password" class="form-label">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password" class="form-box" required />
+  </div>
+  @if ($errors->any()){{-- scan for errors --}}
+  <div>
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li class="text-red-400 text-sm">{{ $error }}</li>{{-- displays error --}}
+      @endforeach
+    </ul>
+  </div>
+  @endif
   <div class="center">
-    <button type="submit" class="btn-submit">Sign Up</button>
+    <button type="submit" class="btn-submit">Sign Up</button>{{-- submit button --}}
   </div>
   <div class="center">
-    <a class="text-white/70" href="/login">Already have an account?</a>
+    <a class="text-white/70" href="/login">Already have an account?</a>{{-- redirect to login --}}
   </div>
 </form>
 </x-base>
