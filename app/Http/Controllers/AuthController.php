@@ -7,16 +7,33 @@ use App\Models\User;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends \Illuminate\Routing\Controller
 {
+  public function __construct() {
+
+  }
   public function index() {
-    
+
   }
   
   /* login function */
-  public function login() {
+  public function login(Request $request) {
+    try {
+      $request->validate([
+        'email' => 'required|string|max:255',
+        'password' => 'required|string',
+      ]);
 
+      if(Auth::attempt($request->only('email', 'password'))) {
+        return redirect('/')->with('success', 'Login successfully.');
+      }
+
+      return redirect('/login')->with('error', 'Invalid credentials.');
+    } catch (\Exception $e) {
+      echo $e;
+    }
   }
 
   /* register function */
