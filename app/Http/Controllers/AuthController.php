@@ -22,7 +22,7 @@ class AuthController extends \Illuminate\Routing\Controller
   /* login function */
   public function login(Request $request) {
     try {
-      $request->validate([/* validation for indexes */
+      $request->validate([/* validation for constraints */
         'email' => 'required|string|max:255',
         'password' => 'required|string',
       ]);
@@ -40,7 +40,7 @@ class AuthController extends \Illuminate\Routing\Controller
   /* register function */
   public function register(Request $request) {
     try {
-      $request->validate([/* uses ValidatesRequests to simplify validation of data */
+      $request->validate([/* validation for constraints */
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:8',
@@ -73,11 +73,30 @@ class AuthController extends \Illuminate\Routing\Controller
 
     $user = Auth::user();
     if (!Auth::attempt(['email' => $user->email, 'password' => $request->password])) {/* validating correct password */
-        return redirect('/')->with('error', 'Password is incorrect.');
+        return redirect()->back()->withErrors(['password' => 'Password is incorrect.']);
     }
 
     $user->delete();/* delete */
     Auth::logout();
     return redirect('/register')->with('success', 'Account deleted successfully.');
+  }
+
+  /* change password function */
+  public function changePassword(Request $request) {
+    $request->validate([/* validation for constraints */
+        'current_password' => 'required|string',
+        'new_password' => 'required|string|min:8',
+        'confirm_new_password' => 'required|string|same:new_password',
+    ]);
+
+    $user = Auth::user();
+    if (!Auth::attempt(['email' => $user->email, 'password' => $request->current_password])) {/* validating correct password */
+        return redirect()->back()->withErrors(['current_password' => 'Current password is incorrect.']);
+    }
+
+    $user->password = bcrypt($request->new_password);/* changing password */
+    $user->save();
+
+    return redirect('/')->with('success', 'Password changed successfully.');
   }
 }
