@@ -13,7 +13,8 @@ class AuthController extends \Illuminate\Routing\Controller
 {
   /* profile function */
   public function index(Request $request) {
-    $deletion_form = $request->query('deletion_form', false);/* toggles delete account form */
+    $deletion_form = $request->query('deletion_form', false);/* enable delete account form */
+    $password_form = $request->query('password_form', false);/* enable change password form */
     $user = Auth::user();
     return view('home', compact('user', 'deletion_form', 'password_form'));
   }
