@@ -1,5 +1,7 @@
 <x-base>{{-- takes base.blade.php as a layout --}}
 <title>Register</title>
+
+<h1>Register</h1>
 <form method="POST" action="/authentication/register" class="max-w-sm mx-auto">
   @csrf
   <div class="mb-5">{{-- name textbox --}}
@@ -14,6 +16,11 @@
     <label for="password" class="form-label">Password</label>
     <input type="password" id="password" name="password" class="form-box" required />
   </div>
-  <button type="submit" class="btn-submit">Submit</button>
+  <div class="center">
+    <button type="submit" class="btn-submit">Sign Up</button>
+  </div>
+  <div class="center">
+    <a href="/login">Already have an account?</a>
+  </div>
 </form>
 </x-base>
