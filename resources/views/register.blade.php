@@ -20,7 +20,7 @@
     <button type="submit" class="btn-submit">Sign Up</button>
   </div>
   <div class="center">
-    <a href="/login">Already have an account?</a>
+    <a class="text-white/70" href="/login">Already have an account?</a>
   </div>
 </form>
 </x-base>
