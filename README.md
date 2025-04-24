@@ -2,7 +2,8 @@
 
 
 ## Quick Installation
-
+    !! MUST have MySql installed !!
+    
     git clone https://github.com/Maruness/laravel-app
 
     cd laravel-app
