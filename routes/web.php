@@ -18,10 +18,10 @@ Route::prefix('authentication')->group(function () {/* auth pages for method POS
   Route::post('/user', [AuthController::class, 'index']);
   Route::post('/login', [AuthController::class, 'login']);
   Route::post('/register', [AuthController::class, 'register']);
+
+  Route::delete('/user/{id}', [AuthController::class, 'deleteUser']);
 });
 
 Route::middleware(['auth'])->group(function () {/* redirects unauthenticated users to login */
-  Route::get('/', function () {
-    return view('home');
-  });
+  Route::get('/', [AuthController::class, 'index']);
 });
