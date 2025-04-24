@@ -1,1 +1,0 @@
-<td class = "border px6 py4 ">{{$slot}}</td>
