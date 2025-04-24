@@ -20,6 +20,7 @@ Route::prefix('authentication')->group(function () {/* auth pages for method POS
   Route::post('/register', [AuthController::class, 'register']);
 
   Route::delete('/user/{id}', [AuthController::class, 'deleteUser']);
+  Route::put('/user/{id}', [AuthController::class, 'changePassword']);
 });
 
 Route::middleware(['auth'])->group(function () {/* redirects unauthenticated users to login */
