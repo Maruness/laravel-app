@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends \Illuminate\Routing\Controller
 {
-  public function __construct() {
-
-  }
   public function index() {
 
   }
@@ -59,6 +56,7 @@ class AuthController extends \Illuminate\Routing\Controller
 
   /* logout function */
   public function logout() {
-
+    Auth::logout();
+    return redirect('/login')->with('success', 'Logged out successfully');
   }
 }
