@@ -1,4 +1,7 @@
 <x-base>{{-- takes base.blade.php as a layout --}}
+
+<button class="btn-green float-right" onclick="window.location.href='/'">Go to Task List</button>{{-- go to task list button --}}
+
 <div class="profile-info">{{-- whole profile box --}}
   <h2>Welcome! <span>{{ $user->name }}</span></h2>
   <p>ID: <span>{{ $user->id }}</span></p>
