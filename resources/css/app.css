@@ -11,10 +11,12 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* global bg css */
 html {
   @apply bg-black/70;
 }
 
+/* authentication css */
 .form-label{
   @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
 }
@@ -53,6 +55,7 @@ h2 {
     @apply text-xl font-bold mb-4 text-white flex m-5;
 }
 
+/* user profile css */
 .profile-info {
   @apply p-6 bg-gray-100 border border-gray-300 rounded-lg shadow-md text-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200;
 }
@@ -69,6 +72,7 @@ h2 {
   @apply font-medium text-gray-900 dark:text-white mx-1;
 }
 
+/* delete account and change password forms css */
 .form {
   @apply p-6 bg-white border border-gray-300 rounded-lg shadow-lg text-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200;
 }
@@ -87,4 +91,33 @@ h2 {
 
 #modal {
   @apply fixed inset-0 bg-black/50 flex justify-center items-center z-50;
+}
+
+/* tasks css */
+.task-item {
+  @apply flex items-center justify-between mb-2 text-white bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg p-1.5;
+}
+
+.task-title {
+  @apply ml-2;
+}
+
+.task-title.completed {
+  @apply line-through;
+}
+
+.form-newtask {
+  @apply mx-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+
+.btn-addtask {
+  @apply px-3.5 py-1 text-lg text-white font-medium rounded-lg w-full sm:w-auto text-center bg-green-600 hover:bg-green-700 focus:ring-green-800;
+}
+
+.btn-deletetask {
+  @apply border border-gray-300 rounded-lg shadow-md text-white/90 px-3 py-1 text-lg w-full text-center bg-red-500 hover:bg-red-400/90 focus:ring-red-800;
+}
+
+.task-success {
+  @apply bg-green-100 text-green-700 p-2 rounded mb-4;
 }
