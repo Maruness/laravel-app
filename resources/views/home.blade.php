@@ -9,9 +9,9 @@
   <p>Email: <span>{{ $user->email }}</span></p>
   <p>Join Date: <span>{{ $user->created_at }}</span></p>
   <p><span><a class="text-blue-500 hover:cursor-pointer" 
-    href="{{ url('/?password_form=true') }}">Change Password</a></span></p>{{-- pop up button for changing password --}}
+    href="{{ url('/profile/?password_form=true') }}">Change Password</a></span></p>{{-- pop up button for changing password --}}
   <p><span><a class="text-red-700 hover:cursor-pointer" 
-    href="{{ url('/?deletion_form=true') }}">Delete Account</a></span></p>{{-- pop up button for deletion form --}}
+    href="{{ url('/profile/?deletion_form=true') }}">Delete Account</a></span></p>{{-- pop up button for deletion form --}}
   <div>
     <form method="POST" action="/logout">
       @csrf
@@ -41,7 +41,7 @@
       </div>
       @endif
       <div class="flex justify-end mt-4">
-        <a href="{{ url('/') }}" class="btn-red" formnovalidate>Cancel</a>{{-- closes the form --}}
+        <a href="{{ url('/profile') }}" class="btn-red" formnovalidate>Cancel</a>{{-- closes the form --}}
         <button type="submit" class="btn-red">Confirm Deletion</button>{{-- proceed to deletion --}}
       </div>
     </form>
@@ -72,7 +72,7 @@
       </div>
       @endif
       <div class="flex justify-end mt-4">
-        <a href="{{ url('/') }}" class="btn-red" formnovalidate>Cancel</a>{{-- closes the form --}}
+        <a href="{{ url('/profile') }}" class="btn-red" formnovalidate>Cancel</a>{{-- closes the form --}}
         <button type="submit" class="">Change Password</button>{{-- proceed to change the password --}}
       </div>
     </form>

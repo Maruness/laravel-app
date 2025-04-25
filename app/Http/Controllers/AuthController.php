@@ -29,7 +29,7 @@ class AuthController extends \Illuminate\Routing\Controller
       ]);
 
       if(Auth::attempt($request->only('email', 'password'))) {/* login process */
-        return redirect('/')->with('success', 'Login successfully.');
+        return redirect('/profile')->with('success', 'Login successfully.');
       }
 
       return redirect('/login')->withErrors(['error' => 'Invalid credentials.']);
@@ -101,6 +101,6 @@ class AuthController extends \Illuminate\Routing\Controller
     $user->password = bcrypt($request->new_password);/* changing password */
     $user->save();
 
-    return redirect('/')->with('success', 'Password changed successfully.');
+    return redirect('/profile')->with('success', 'Password changed successfully.');
   }
 }
